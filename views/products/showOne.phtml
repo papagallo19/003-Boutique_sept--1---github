@@ -1,0 +1,16 @@
+<h1 class="showOne"><?= ucfirst(htmlspecialchars($product['name'])) ?></h1>
+
+<div class="productShowOne">
+		<div class="imageShowOne">
+				<img src="resources/images/products/<?=$product['imagePath']; ?>" alt="<?= htmlspecialchars($product['name'])?>">
+		</div>
+		<div class="saufImageShowOne">
+			<p><strong>description du produit : </strong><br><?= nl2br(htmlspecialchars($product['description'])) ?> </p>
+			<div class="boutonsShowOne">
+				<a href="shoppingCart/" class="button">Ajouter au panier</a>
+				<a href="" class="button">Revenir à la liste</a>
+				<span class="fondRouge"><?= $product['priceTTC']?>€</span>
+			</div>
+		</div>
+		
+	</div>

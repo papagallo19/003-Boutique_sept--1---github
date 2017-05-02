@@ -1,0 +1,51 @@
+<h1>Create your account</h1>
+<form class="createAccount" action="customers/createAccount/" method="POST">
+	<div class="identifiant">
+		<label for="email">Adresse email</label>
+		<input type="email" name="email" id="email">
+	</div>
+	<div class="motPasse">
+		<label for="password">mot de passe</label>
+		<input type="number" name="password" id="password">
+	</div>
+	<div class="select">
+		<label for="civility">Civilité</label>
+		<select name="civility" id="civility">
+			<option>Choisissez</option>
+			<option>M</option>
+			<option>Mme</option>
+			<option>Mlle</option>
+		</select>
+	</div>
+	<div class="prenom">
+		<label for="firstName">Prénom</label>
+		<input type="text" name="firstName" id="firstName">
+	</div>
+	<div class="nom">
+		<label for="lastName">Nom</label>
+		<input type="text" name="lastName" id="lastName">
+	</div>
+	
+	<!-- <div class="adresse">
+		<label for="adresse">Adresse</label>
+		<textarea name="adresse" id="adresse" cols="30" rows="3"></textarea>
+	</div>
+	<div class="codePostal">
+		<label for="codePostal">Code postal</label>
+		<input type="zip" name="codePostal" Code postal="codePostal">
+	</div>
+	<div class="commune">
+		<label for="commune">Commune</label>
+		<input type="text" name="commune" id="commune">
+	</div>
+	<div class="select">
+		<label for="pays">Pays</label>
+		<select name="pays" id="pays">
+			<option>Choisissez</option>
+			<option>France</option>
+			<option>Allemagne</option>
+			<option>Italie</option>
+		</select>
+	</div> -->
+	<input class="submit" type="submit" value="Envoyer">
+</form>

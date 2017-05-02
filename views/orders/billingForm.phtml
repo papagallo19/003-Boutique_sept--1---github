@@ -1,0 +1,36 @@
+<h1>Coordonnées de facturation</h1>
+
+<!-- MESSAGES D'ERREUR ================== -->
+<?php if(count($billingInformation['errors'])>0):?>
+<?php foreach($billingInformation['errors'] as $errorMessage):?>
+	<p><?= htmlspecialchars($errorMessage)?></p>
+<?php endforeach ?>	
+<?php endif ?>
+
+<!-- formulaire  -->
+
+<form action="orders/saveBillingInformation/" class="billingForm" method="post">
+	<div class="select">
+		<label for="civilite">Civilité :</label>
+			<select name="civilite" id="civilite">
+				<option value="M">M</option>
+				<option value="Mme">Mme</option>
+				<option value="Mlle">Mlle</option>
+			</select>
+	</div>
+	<input type="text" name="prenom" placeholder="Prénom">
+	<input type="text" name="nom" placeholder="Nom">
+	<textarea name="adresse" id="adresse" placeholder="Adresse" cols="30" rows="4"></textarea>
+	<input type="number" name="codePostal" placeholder="codePostal">
+	<input type="text" name="commune" placeholder="commune">
+	<div class="select">
+		<label for="pays">Pays :</label>
+		<select name="pays" id="pays">
+			<option value="France">France</option>
+			<option value="Angleterre">Angleterre</option>
+			<option value="Allemagne">Allemagne</option>
+		</select>
+	</div>
+	<input type="tel" name="telephone" placeholder="Telephone">
+	<input type="submit" value="Envoyer">
+</form>

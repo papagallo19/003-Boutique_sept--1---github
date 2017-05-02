@@ -1,0 +1,73 @@
+<?php if(isset($category)): ?>
+	<h1><?= $category['name']?>: (<?= intval($category['numberProducts']) ?>)</h1>
+<?php elseif(isset($search)) : ?>
+	<h1>Résultat de la recherche <em class="vert"> <?=$search ?> </em> : (<?= $numberProducts ?>)</h1>
+<?php else:?>
+	<h1>Tous les produits (<?= intval($numberProducts) ?>)</h1>
+<?php endif; ?>
+
+
+
+<!-- PAGINATION +++++++++++++++++++++++++++++ -->
+
+<?php if($pagination['lastPage'] > 1 ) : ?>
+	<nav class="pagination">
+		<?php for($page = 1; $page<=$pagination['lastPage']; $page++):  ?>
+			<?php if($page!=$pagination['requestedPage']): ?>
+				<?php if(isset($category)): ?>
+					<a href="products/showByCategory/?id=<?=htmlspecialchars($category['id']) ?>&amp;page=<?=intval($page) ?>" class="button" >
+				<?php elseif(isset($search)): ?>
+					<a href="products/showBySearch/?search=<?= htmlspecialchars($search)?>&amp;page=<?=intval($page) ?>" class="button">
+				<?php else: ?>
+					<a href="./?page=<?=intval($page) ?>" class="button">								
+				<?php endif; ?>
+					<?= intval($page) ?>
+					</a>
+			<?php else: ?>
+				<span class="button">
+					<?=intval($page) ?>
+				</span>	
+			<?php endif; ?>
+		<?php endfor; ?>
+	</nav>
+<?php endif; ?>
+
+
+<!-- AFFICHAGE DES PRODUITS =================== -->
+
+<div class="products">
+	<?php foreach ($products as $product ):?>
+	<div class="product">
+		<div class="image">
+			<a href="products/showOne/?id=<?= htmlspecialchars($product['id'])?>" >
+				<img src="resources/images/products_thumbnails/<?=$product['imagePath']; ?>" alt="<?= htmlspecialchars($product['name'])?>">
+			</a>
+		</div>
+		<div class="saufImage">
+			<h2><?= $product['name']?></h2>
+			<p><strong>description du produit : </strong><?= nl2br(htmlspecialchars(mb_strimwidth($product['description'], 0, 125, '…'))) ?> </p>
+
+			<div class="boutons">
+				<a href="shoppingCart/addProduct/?id=<?= htmlspecialchars($product['id'])?>" class="button">Ajouter au panier</a>
+				<a href="products/showOne/?id=<?= htmlspecialchars($product['id'])?>" class="button">En savoir plus</a>
+				<span class="fondRouge"><?= $product['priceTTC']?>€</span>
+			</div>
+
+		</div>
+		
+	</div>
+	<?php endforeach; ?>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+

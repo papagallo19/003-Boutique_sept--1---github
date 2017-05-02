@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="UTF-8">
+	<title>Boutique_JM</title>
+	<base href="<?= CLIENT_ROOT ?>" />
+	<link rel="stylesheet" href="resources/css/style.css">
+</head>
+<body>
+	<header class="clearfix">
+
+	<!-- HOME ==================== -->
+		<section class="home">
+			<?php if($_SERVER['REQUEST_URI']!== CLIENT_ROOT):?>
+				<a href="./">
+					<h6>Accueil</h6>
+				</a>
+			<?php else: ?>
+				<a href="">
+					<h6>Accueil</h6>
+				</a>
+			<?php endif ?>
+		</section>
+
+		<!-- SHOPPING CART ============= -->
+		<section class="shoppingCart">
+			<h6>Panier</h6>
+			<div>
+				<span>
+						<?= intval($shoppingCart['numberOfProducts']) ?> article<?= intval($shoppingCart['numberOfProducts']) > 1 ? 's' : null ?> :
+					</span>
+					<span class="total-amount">
+						<?= number_format($shoppingCart['totalAmount'], 2, ',', ' ') ?> €
+					</span>
+					<hr />
+					<a href="shoppingCart/" class="button">
+						Accéder au panier
+					</a>
+			</div>	
+		</section>
+
+		<!-- CUSTOMER ================== -->
+		<section class="customer">
+			<h6>Espace Client </h6>
+			<div>
+				<?php if(isset($_SESSION['customer']['firstName'])): ?>
+				<a href="customers/signOut/" class="button">Se déconnecter</a>
+				<?php else : ?>
+				<form action="customers/authenticate/" method="post">
+					<label class="hidden" for="username">adresse électronique</label>
+					<input type="text" name="username" id="username" placeholder="adresse électronique" required>
+					<label for="password" class="hidden">Mot de passe</label>
+					<input type="text" name="password" id="password" placeholder="mot de passe" required>
+					<input type="submit" class="button" value="S'authentifier">
+				</form>
+				<hr>
+				<a href="customers/signUp/" class="button">
+					Créer un compte
+				</a>
+				<?php endif ?>
+			</div>
+			
+		</section>	
+	</header>
+
+	
+	<div class="contenant">
+		<aside class="leftColumn">
+
+<!-- AFFICHAGE SESSION ============================= -->
+
+			<div class="session bleu">
+				<?php if(isset($_SESSION['customer']['firstName'])) :?>
+				<h4>Bonjour <?= $_SESSION['customer']['firstName']?> !</h4>
+				<a href="customers/signOut/" class="disconnect">Déconnection</a>
+			<?php else :?>
+				<h4>Vous n'êtes pas identifié</h4>
+			<?php endif; ?>
+			</div>
+
+
+<!-- RECHERCHE =========================== -->
+
+			<div class="recherche">
+				<h3 class="rouge">Recherche</h3>
+				<form action="products/showBySearch/" method="get" class="search">
+					<input type="text" name="search" placeholder="recherche"/>
+					<input type="submit" value="rechercher"/>
+				</form>
+			</div>	
+		
+		
+
+
+		<!-- CATEGORIES ========================== -->
+			<div class="categories">
+				<h3 class="rouge">Categories</h3>
+			<?php if(count($categories) >0):?>
+				<?php foreach($categories as $category): ?>
+					<a class="bleu" href="products/showByCategory/?id=<?= intval($category['id']) ?>"> <?= htmlspecialchars($category['name'])?> : (<?= intval($category['numberProducts'])?>)
+					</a>
+				<?php endforeach; ?>
+			<?php endif; ?>
+			</div>
+		
+		</aside>
+
+	<!-- CONTENT ============= -->
+
+		<section class="content">
+			<?= $content; ?>
+			
+		</section>
+
+	</div>   <!-- fin classe contenant -->
+	<!-- FOOTER ================ -->
+	<footer>
+		
+	</footer>
+	
+</body>
+</html>
